@@ -2,7 +2,12 @@
 
 **PHP & Framework Quality Guideline DOT Indonesia** merupakan sebuah standar dan panduan bagi backend engineer DOT Indonesia atau vendor yang menggunakan PHP atau framework PHP sebagai server side programming.
 
+Kunjungi [Development Stack & Tools](https://github.com/pt-dot/development-stack-tools) untuk melihat daftar aplikasi dan perangkat development yang dibutuhkan
+
+---
+
 ## 1. General Standard
+
 a. Hal-hal berikut ini seharusnya dimasukkan ke dalam list `.gitignore` dan tidak boleh di push ke dalam repository:
 
 + direktori `vendors`, `node_modules`
@@ -14,15 +19,17 @@ b. Gunakan penamaan variable atau method yang singkat & jelas, serta tidak membi
 
 **good**:
 
-`user`, `storeData`, `debetAccount`
+`$user`, `$storeData`, `$debetAccount`
 
 **bad**:
 
-`aaaa`, `name1`, `thisistoloongvariableyoumaynotseeit`
+`$aaaa`, `$name1`, `$thisistoloongvariableyoumaynotseeit`
 
-c. Error message / debug message hanya boleh ditampilkan pada mode `development` atau `staging`. Gunakan **default error message** ketika di mode `production`
+c. Variable atau method menggunakan format `CamelCase`
 
-d. Tidak meletakkan endpoint atau informasi credential yang bersifat private secara hard code di dalam source code. Contoh:
+d. Error message / debug message hanya boleh ditampilkan pada mode `development` atau `staging`. Gunakan **default error message** ketika di mode `production`
+
+e. Tidak meletakkan endpoint atau informasi credential yang bersifat private secara hard code di dalam source code. Contoh:
 
 ```php
 protected $secretKey = 'ThisIsN0tSuppOs3dToBeHere';
@@ -32,10 +39,11 @@ protected $ProdUrl = 'https://someprivateip/api';
 
 Manfaatkan file `.env` untuk menyimpan value sensitif tanpa terekspose di dalam source code.
 
-e. Source code tidak mengandung *backdoor* atau shell script yang berbahaya.
+f. Source code tidak mengandung *backdoor* atau shell script yang berbahaya.
 
-f. Semua form harus menggunakan `CSRF Protection`
+g. Semua form harus menggunakan `CSRF Protection`
 
+---
 
 ## 2. PHP Coding Standard
 
@@ -140,6 +148,8 @@ class Foo {
 ```
 
 f. Penggunaan PHP framework yang disarankan adalah [Laravel](https://laravel.com/) atau microframework [Lumen](https://lumen.laravel.com/).
+
+---
 
 # 3. Laravel / Lumen / PHP Framework Engineering Guideline
 
@@ -273,3 +283,17 @@ l. Saat production mode pastikan hal berikut:
 + `APP_ENV=production`
 + `APP_DEBUG=false`
 + `APP_KEY` harus di generate ulang menggunakan perintah `php artisan key:generate`
+
+---
+
+# Kontribusi
+
+Internal engineer silakan berkontribusi untuk membuat guideline ini bisa lebih lengkap dan lebih baik. Caranya:
+
++ Fork repository ini
++ Buat branch baru di repository hasil fork
++ Edit file readme sesuai dengan kebutuhan lalu commit.
++ Ajukan pull request
++ AVP divisi atau VP of engineering akan melakukan review dan melakukan approval Pull Request.
+
+Jika ada pertanyaan atau permintaan update silakan untuk mengajukan issue di repository terkait.
