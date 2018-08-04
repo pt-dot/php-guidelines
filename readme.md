@@ -286,6 +286,38 @@ l. Saat production mode pastikan hal berikut:
 
 ---
 
+## 4. Package & libraries
+
+Berikut merupakan daftar library / package PHP & Laravel yang biasa digunakan dalam proses development.
+
+1. [Laravel Debugbar](https://github.com/barryvdh/laravel-debugbar) - debug & monitor resource laravel
+2. [Laravel Flash](https://github.com/laracasts/flash) - Flash message wrapper
+3. [Laravel CORS](https://github.com/barryvdh/laravel-cors) - Cross Origin Resource Sharing header
+4. [Laravel Excel](https://laravel-excel.maatwebsite.nl/) - Spreadsheet wrapper
+5. [Socialite](https://github.com/laravel/socialite) - OAuth authentication untuk Facebook, Twitter, Google, Linkedin, Github, Bitbucket
+6. [L5 Repository](https://github.com/andersao/l5-repository) - Laravel 5 repository abstraction
+7. [Laravel Horizon](https://horizon.laravel.com/) - Dashboard untuk monitoring Laravel Queue dengan Redis
+8. [Codeception](https://codeception.com/) - Testing suite functional, API, Acceptance, Unit, dll
+9. [Doctrine DBAL](https://github.com/doctrine/dbal) - Doctrine Database Abstraction Layer untuk support laravel migration
+10. [Predis Laravel](https://github.com/nrk/predis) - Redis client untuk PHP
+11. [Laravel Sentry](https://sentry.io/for/laravel/) - Laravel error tracking menggunakan [sentry.io](https://sentry.io/for/laravel/)
+12. [Laravelcollective HTML](https://laravelcollective.com/docs/master/html) - HTML & form laravel wrapper
+13. [Faker](https://github.com/fzaninotto/Faker) - Untuk generate data dummy
+14. [Laravel Datatable](https://github.com/yajra/laravel-datatables) - Laravel JQuery datatable library
+15. [Laravel Tinker](https://github.com/laravel/tinker) - REPL untuk laravel
+16. [Laravel PDF](https://github.com/niklasravnsborg/laravel-pdf), [laravel dompdf](https://github.com/barryvdh/laravel-dompdf) - Wrapper & generate pdf di Laravel
+17. [Laravel Self Diagnosis](https://github.com/beyondcode/laravel-self-diagnosis) - self diagnosis test laravel
+18. [Intervention Image](http://image.intervention.io/) - PHP image handling & manipulation
+19. [JWT auth](https://github.com/tymondesigns/jwt-auth) - JWT wrapper untuk laravel & lumen
+20. [Laravel Passport](https://laravel.com/docs/5.6/passport) - Oauth2 Server Laravel
+21. [Laravel fractal wrapper](https://github.com/spatie/laravel-fractal) - Data transformasi wrapper laravel
+22. [Activity Log](https://github.com/spatie/laravel-activitylog) - Pencatatan aktivitas aplikasi ke dalam log
+23. [LDAP Authentication](https://github.com/pt-dot/ldap-auth) - integrasi auth dengan LDAP
+24. [Laravel Backup](https://github.com/spatie/laravel-backup) - backup direktori laravel & dump database
+25. [Laravel ER Diagram generator](https://github.com/beyondcode/laravel-er-diagram-generator) - Generate Entity Relationship Diagram dari Model Laravel
+
+---
+
 # Kontribusi
 
 Internal engineer silakan berkontribusi untuk membuat guideline ini bisa lebih lengkap dan lebih baik. Caranya:
