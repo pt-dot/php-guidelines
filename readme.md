@@ -5,17 +5,25 @@
 Kunjungi [Development Stack & Tools](https://github.com/pt-dot/development-stack-tools) untuk melihat daftar aplikasi dan perangkat development yang dibutuhkan
 
 ---
+# Table of Contents
+1. [General Standard](#1-general-standard)
+2. [PHP Coding Standard](#2-php-coding-standard)
+3. [Laravel / Lumen / PHP Framework Engineering Guideline](#3-laravel--lumen--php-framework-engineering-guideline)
+4. [Package & Libraries](#4-package--libraries)
+---
 
 ## 1. General Standard
 
-a. Hal-hal berikut ini seharusnya dimasukkan ke dalam list `.gitignore` dan tidak boleh di push ke dalam repository:
+### a .gitignore
+Hal-hal berikut ini seharusnya dimasukkan ke dalam list `.gitignore` dan tidak boleh di push ke dalam repository:
 
 + direktori `vendors`, `node_modules`
 + file upload dari user
 + file `.env`
 + Informasi credential penting atau krusial
 
-b. Gunakan penamaan variable atau method yang singkat & jelas, serta tidak membingungkan.
+### b. Variable Naming Conversion
+Gunakan penamaan variable atau method yang singkat & jelas, serta tidak membingungkan.
 
 **good**:
 
@@ -25,11 +33,14 @@ b. Gunakan penamaan variable atau method yang singkat & jelas, serta tidak membi
 
 `$aaaa`, `$name1`, `$thisistoloongvariableyoumaynotseeit`
 
-c. Variable atau method menggunakan format `CamelCase`
+### c. CamelCase
+Variable atau method menggunakan format `CamelCase`
 
-d. Error message / debug message hanya boleh ditampilkan pada mode `development` atau `staging`. Gunakan **default error message** ketika di mode `production`
+### d. Error message
+Error message / debug message hanya boleh ditampilkan pada mode `development` atau `staging`. Gunakan **default error message** ketika di mode `production`
 
-e. Tidak meletakkan endpoint atau informasi credential yang bersifat private secara hard code di dalam source code. Contoh:
+### e. Sensitive Information
+Tidak meletakkan endpoint atau informasi credential yang bersifat private secara hard code di dalam source code. Contoh:
 
 ```php
 protected $secretKey = 'ThisIsN0tSuppOs3dToBeHere';
@@ -39,17 +50,22 @@ protected $ProdUrl = 'https://someprivateip/api';
 
 Manfaatkan file `.env` untuk menyimpan value sensitif tanpa terekspose di dalam source code.
 
-f. Source code tidak mengandung *backdoor* atau shell script yang berbahaya.
+### f. Secure & Verified Code
+Source code tidak boleh mengandung *backdoor* atau shell script yang berbahaya.
+Jika menggunakan script dari referensi luar, pastikan script tersebut aman & verified.
 
-g. Semua form harus menggunakan `CSRF Protection`
+### g. CSRF Token
+Semua form harus menggunakan `CSRF Protection`
 
 ---
 
 ## 2. PHP Coding Standard
 
-a. Harus mengikuti PHP [PSR-1: Basic Coding Standard](http://www.php-fig.org/psr/psr-1/)
+### a. PSR-1
+Harus mengikuti PHP [PSR-1: Basic Coding Standard](http://www.php-fig.org/psr/psr-1/)
 
-b. Harus Mengikuti PHP [PSR-2: Coding Style Guide](http://www.php-fig.org/psr/psr-2/)
+### b. PSR-2
+Harus Mengikuti PHP [PSR-2: Coding Style Guide](http://www.php-fig.org/psr/psr-2/)
 
 PSR-2 overview:
 ```php
@@ -80,9 +96,11 @@ class Foo extends Bar implements FooInterface
 }
 ```
 
-c. Jika menggunakan autoloading, ikuti standard [PSR-4: Autoloading](http://www.php-fig.org/psr/psr-4/)
+### c. PSR-4
+Jika menggunakan autoloading, ikuti standard [PSR-4: Autoloading](http://www.php-fig.org/psr/psr-4/)
 
-d. Agar source code lebih mudah dibaca dan dipahami sertakan `DockBlock` pada fungsi atau attribute. Manfaatkan DockBlock untuk menginformasikan proses, variable, dan output yang digunakan. Acuan penggunaan DockBlock dapat dilihat di [PHPDOC - DOCKBLOCK Basic Syntax](http://docs.phpdoc.org/references/phpdoc/basic-syntax.html)
+### d. DockBlock (/JavaDoc)
+Agar source code lebih mudah dibaca dan dipahami sertakan `DockBlock` pada fungsi atau attribute. Manfaatkan DockBlock untuk menginformasikan proses, variable, dan output yang digunakan. Acuan penggunaan DockBlock dapat dilihat di [PHPDOC - DOCKBLOCK Basic Syntax](http://docs.phpdoc.org/references/phpdoc/basic-syntax.html)
     
 Overview:
 ```php
@@ -116,7 +134,8 @@ class Foo {
 }
 ```
 
-e. Tidak boleh ada `Dead Code` saat merge ke branch `master`. `Dead Code` adalah source code (method, attributes, class) yang sudah tidak digunakan akan tetapi masih tersimpan di dalam codebase dan biasanya hanya dinonaktifkan menggunakan `comment`
+### e. Dead Code
+Tidak boleh ada `Dead Code` saat merge ke branch `master`. `Dead Code` adalah source code (method, attributes, class) yang sudah tidak digunakan akan tetapi masih tersimpan di dalam codebase dan biasanya hanya dinonaktifkan menggunakan `comment`
 
 Overview:
 
@@ -147,15 +166,20 @@ class Foo {
 }
 ```
 
-f. Penggunaan PHP framework yang disarankan adalah [Laravel](https://laravel.com/) atau microframework [Lumen](https://lumen.laravel.com/).
+### f. Penggunaan Framework
+- Penggunaan PHP framework yang disarankan adalah [Laravel](https://laravel.com/) atau microframework [Lumen](https://lumen.laravel.com/).
+- Jika terpaksa menggunakan framework lain, mohon kordinasikan dengan AVP.
 
 ---
 
 # 3. Laravel / Lumen / PHP Framework Engineering Guideline
 
-a. Untuk project yang bersifat longterm disarankan menggunakan framework versi LTS (Long Term Support) atau disesuaikan dengan kebutuhan.
+### a. Framework Version
+- Untuk project yang bersifat longterm disarankan menggunakan framework versi LTS (Long Term Support) atau disesuaikan dengan kebutuhan.
+- Jika tidak ada kebutuhan URGENT, dilarang mengupgrade versi framework pada project yang sedang berjalan.
 
-b. Gunakan fitur `Database Transaction` untuk operasi persistence yang menggunakan lebih dari 1 tabel database.
+### b. DB Transaction
+Gunakan fitur `Database Transaction` untuk operasi persistence yang menggunakan lebih dari 1 tabel database.
 
 overview:
 
@@ -178,7 +202,8 @@ try {
 }
 ```
 
-c. Untuk aplikasi yang kompleks, kumpulkan class `Model`, `Controller`, atau `Views` dalam direktori tersendiri sesuai dengan konteks / domain aplikasinya.
+### c. File Grouping
+Untuk aplikasi yang kompleks, kumpulkan class `Model`, `Controller`, atau `Views` dalam direktori tersendiri sesuai dengan konteks / domain aplikasinya.
 
 simple case:
 
@@ -206,14 +231,16 @@ simple case:
 ```
 
 
-d. Untuk efisiensi dan efektivitas masa development, gunakan *library* yang sudah umum digunakan dengan kriteria sebagai berikut:
+### d. Penggunaan Library
+Untuk efisiensi dan efektivitas masa development, gunakan *library* yang sudah umum digunakan dengan kriteria sebagai berikut:
 
 + library aktif di maintain oleh kontributor / owner
 + Sesuai dengan kebutuhan engineering project
 + Sesuai dengan development stack yang sedang digunakan
 + Penggunaan library harus benar-benar dapat mempermudah proses development
 
-e. Gunakan perintah berikut untuk optimasi saat deployment Laravel terutama di staging & production:
+### e. Optimasi Laravel
+Gunakan perintah berikut untuk optimasi saat deployment Laravel terutama di staging & production:
 
 ```bash
 php artisan route:cache
@@ -222,20 +249,28 @@ composer dumpautoload --classmap-authoritative
 ```
 > khusus untuk `route:cache` tidak boleh ada fungsi closure pada file route
 
-f. Manfaatkan fitur `event` untuk fungsi yang tidak dependen dengan hasil outputnya. Misal: kirim email, logging, push notification. [Dokumentasi event Laravel](https://laravel.com/docs/5.6/events)
+### f. Event
+Manfaatkan fitur `event` untuk fungsi yang tidak dependen dengan hasil outputnya. Misal: kirim email, logging, push notification. [Dokumentasi event Laravel](https://laravel.com/docs/5.6/events)
 
-g. Gunakan `eager loading` untuk optimasi penggunaan relationship di eloquent. Baca implementasi [Eager Loading](https://laravel.com/docs/5.6/eloquent-relationships#eager-loading).
+### g. Eloquent : Eager Loading
+Gunakan `eager loading` untuk optimasi penggunaan relationship di eloquent. Baca implementasi [Eager Loading](https://laravel.com/docs/5.6/eloquent-relationships#eager-loading).
 
-h. Selalu gunakan `migration` untuk pembuatan atau modifikasi skema database saat development baik itu menambah kolom, edit kolom, hapus kolom, atau modifikasi index. Metode ini lebih baik daripada merubah satu file migration lalu menjalankan perintah `php artisan migrate:rollback` lalu `php artisan migrate` lagi. Baca implementasi [migration](https://laravel.com/docs/5.6/migrations)
+### h. DB Migration
+- Selalu (WAJIB) gunakan `migration` untuk pembuatan atau modifikasi skema database saat development baik itu menambah kolom, edit kolom, hapus kolom, atau modifikasi index. 
+- Metode ini lebih baik daripada merubah satu file migration lalu menjalankan perintah `php artisan migrate:rollback` lalu `php artisan migrate` lagi. Baca implementasi [migration](https://laravel.com/docs/5.6/migrations)
 
-i. Dalam kasus tertentu pengambilan data menggunakan `Eloquent` akan memakan terlalu banyak resource. Bentuk optimalisasinya bisa dari salah satu cara berikut:
+### i. Eloquent Optimization
+Dalam kasus tertentu pengambilan data menggunakan `Eloquent` akan memakan terlalu banyak resource. Bentuk optimalisasinya bisa dari salah satu cara berikut:
     
 + Ganti `relationship` dengan menggunakan operasi `join` sehingga query cukup dijalankan satu kali.
 + Ganti operasi menggunakan `Query Builder`
 
-j. Gunakan blok `try - catch` untuk handling exception terutama di operasi yang berkaitan dengan I/O seperti database, HTTP request, file, service layer.
+### j. Try Catch , Report & Throw
+- Gunakan blok `try - catch` untuk handling exception terutama di operasi yang berkaitan dengan I/O seperti database, HTTP request, file, service layer.
+- Try & Catch berfungsi untuk menangkap `error exception` yang terjadi & memungkinkan aplikasi melakukan aksi tertentu terkait error tersebut.
 
-overview:
+**DONT:**
+- Jangan biarkan technical error muncul / terbaca oleh client app/frontend.
 
 ```php
 /**
@@ -255,7 +290,31 @@ public function register(Request $request)
 }
 ```
 
-k. Semua konfigurasi credential dari pihak ketiga harus diset melalui `config/service.php` dan value harus diambil dari file `.env`
+**DO:**
+- Gunakan fitur `report($exception)` untuk menulis detail exception di file `laravel.log`.
+- Dan tampilkan pesan error yang human friendly ke client app / frontend.
+
+```php
+/**
+* This is description of this class
+*
+* @param Request $request
+* @return Response
+*/
+public function register(Request $request)
+{
+    try {
+        $service = $this->applicationService->registerUser($user);
+        return response()->json($service);
+    } catch(Exception $e) {
+        report($e);
+        return response()->json(['error' => "Human Friendly Message"]);
+    }
+}
+```
+
+### k. Service Config
+Semua konfigurasi credential dari pihak ketiga harus diset melalui `config/service.php` dan value harus diambil dari file `.env`
 
 overview:
 
@@ -278,7 +337,8 @@ return [
 ];
 ```
 
-l. Saat production mode pastikan hal berikut:
+### l. ENV Production
+Saat production mode pastikan hal berikut:
 
 + `APP_ENV=production`
 + `APP_DEBUG=false`
